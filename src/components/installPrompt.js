@@ -44,7 +44,7 @@ const InstallPrompt = () => {
     <>
       {showModal && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 "
           onClick={() => setShowModal(false)}>
           <div
             className="bg-white p-6 rounded-lg shadow-lg w-80 text-center"
@@ -72,7 +72,7 @@ const InstallPrompt = () => {
       {showButton && (
         <button
           onClick={() => setShowModal(true)}
-          className="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-600">
+          className="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-600 z-50">
           Install App
         </button>
       )}
