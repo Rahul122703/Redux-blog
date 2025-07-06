@@ -36,9 +36,6 @@ const Counter = () => {
           type="number"
           value={incrementAmount}
           onChange={(e) => {
-            console.clear();
-            console.log("value");
-            console.log(e.target.value);
             setIncrementAmount(e.target.value);
           }}
           className="border border-gray-400 rounded-md px-3 py-1 mt-4 text-center"

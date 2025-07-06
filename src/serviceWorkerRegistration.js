@@ -32,20 +32,18 @@ function registerValidSW(swUrl, config) {
 }
 
 function checkValidServiceWorker(swUrl, config) {
-  fetch(swUrl)
-    .then((response) => {
-      if (
-        response.status === 404 ||
-        response.headers.get("content-type").indexOf("javascript") === -1
-      ) {
-        navigator.serviceWorker.ready.then((registration) =>
-          registration.unregister()
-        );
-      } else {
-        registerValidSW(swUrl, config);
-      }
-    })
-    .catch(() => console.log("No internet connection."));
+  fetch(swUrl).then((response) => {
+    if (
+      response.status === 404 ||
+      response.headers.get("content-type").indexOf("javascript") === -1
+    ) {
+      navigator.serviceWorker.ready.then((registration) =>
+        registration.unregister()
+      );
+    } else {
+      registerValidSW(swUrl, config);
+    }
+  });
 }
 
 export function unregister() {
