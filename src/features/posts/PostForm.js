@@ -34,7 +34,7 @@ const PostForm = () => {
   };
 
   return (
-    <div className=" bg-gray-100 flex items-center justify-center px-4 w-1/3">
+    <div className=" bg-gray-100 flex items-center justify-center px-4 lg:w-[40%] w-full">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-lg rounded-xl p-8  w-full border border-gray-300 flex flex-col gap-4">

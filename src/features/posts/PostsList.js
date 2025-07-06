@@ -9,7 +9,7 @@ const PostsList = () => {
     <BlogCard {...post} key={index} />
   ));
   return (
-    <div className="bg-gray-100 p-6 flex flex-row gap-6 items-center w-full flex-wrap">
+    <div className="bg-gray-100 p-6 flex flex-row gap-6 items-center w-full flex-wrap justify-center">
       {allPosts}
     </div>
   );
