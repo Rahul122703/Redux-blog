@@ -28,7 +28,7 @@ const postsSlice = createSlice({
           id: nanoid(),
           title,
           content,
-          userid,
+          userid: Number(userid),
           reaction: {
             like: 0,
             smile: 0,
