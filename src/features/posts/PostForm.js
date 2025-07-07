@@ -1,24 +1,43 @@
 import React, { useEffect, useState } from "react";
-
-import { postAdded, updatePost, selectAllPosts } from "./postsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  postAdded,
+  updatePost,
+  fetechPosts,
+  selectAllPosts,
+  selectErrorMessage,
+  selectCurrentStatus,
+} from "./postsSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import { selectAllUsers } from "../users/usersSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const PostForm = () => {
+  // Form states
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [userid, setUserId] = useState(0);
-  const editData = useSelector((state) => state.posts.editData);
+  const [content, setContent] = useState("");
+
+  // Redux selectors
+  const allUsers = useSelector(selectAllUsers);
   const editPostData = useSelector(selectAllPosts);
+  const postErrorMessage = useSelector(selectErrorMessage);
+  const postCurrentStatus = useSelector(selectCurrentStatus);
+  const editData = useSelector((state) => state.posts.editData);
+
+  // Redux dispatcher
+  const dispatch = useDispatch();
   let postEdition = false;
+
+  useEffect(() => {
+    if (postCurrentStatus === "idle") {
+      dispatch(fetechPosts());
+    }
+  }, [postCurrentStatus, dispatch]);
 
   if (editData.id) {
     postEdition = editPostData.find(
       (currentPost) => currentPost.id === editData.id
     );
-    console.log("postEdition");
-    console.log(postEdition);
   }
 
   useEffect(() => {
@@ -29,15 +48,11 @@ const PostForm = () => {
     }
   }, [postEdition]);
 
-  const allUsers = useSelector(selectAllUsers);
-  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.clear();
     if (!postEdition) {
       dispatch(postAdded({ id: nanoid(), title, content, userid }));
     } else {
-      console.log("updating");
       dispatch(updatePost({ title, content, userid }));
       postEdition = false;
     }
@@ -45,25 +60,21 @@ const PostForm = () => {
     setContent("");
     setUserId("");
   };
-  const userOption = allUsers.map((currentUser) => {
-    const { name, id } = currentUser;
-
-    return (
-      <option value={id} key={id}>
-        {name}
-      </option>
-    );
-  });
+  const userOption = allUsers.map(({ name, id }, idx) => (
+    <option value={id} key={`${id}-${idx}`}>
+      {name}
+    </option>
+  ));
 
   const saveConditon = () => {
     return !title.trim() || !content.trim() || !userid ? true : false;
   };
 
   return (
-    <div className=" bg-gray-100 flex items-center justify-center px-4 lg:w-[40%] w-full">
+    <div className=" bg-gray-100 flex items-center justify-center px-4 lg:w-[35%] w-full h-full p-8 border border-none">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-xl p-8  w-full border border-gray-300 flex flex-col gap-4">
+        className="bg-white shadow-lg rounded-xl w-full border border-gray-300 flex flex-col p-4">
         <h1 className="text-2xl font-bold text-gray-800 text-center">
           Create a Blog Post
         </h1>

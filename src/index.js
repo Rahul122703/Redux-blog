@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 setTimeout(() => {
-  console.clear();
+  // console.clear();
 }, 2000);
 
 root.render(
