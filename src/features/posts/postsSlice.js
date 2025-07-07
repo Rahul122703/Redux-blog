@@ -1,7 +1,6 @@
 import {
   createAsyncThunk,
   createSlice,
-  current,
   nanoid,
 } from "@reduxjs/toolkit";
 import axios from "axios";
