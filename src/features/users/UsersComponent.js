@@ -5,8 +5,6 @@ import { selectAllUsers } from "./usersSlice";
 const UsersComponent = ({ userid }) => {
   const allUsers = useSelector(selectAllUsers);
   const matchedUser = allUsers.find((currentUser) => currentUser.id === userid);
-  console.log("matchedUser");
-  console.log(matchedUser);
   const displayName = matchedUser ? matchedUser.name : "Unknown Author";
 
   return (
