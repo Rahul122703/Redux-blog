@@ -28,6 +28,7 @@ const initialState = {
       },
     },
   ],
+  editData: { id: null, editing: false },
 };
 
 const postsSlice = createSlice({
@@ -62,11 +63,36 @@ const postsSlice = createSlice({
         }
       });
     },
+    deletePost: (state, action) => {
+      state.posts = state.posts.filter(
+        (currentPost) => currentPost.id !== action.payload
+      );
+    },
+    startEditing: (state, action) => {
+      state.editData = { id: action.payload, editing: true };
+    },
+    updatePost: (state, action) => {
+      console.log("action.payload");
+      console.log(action.payload);
+      const { title, content, userid } = action.payload;
+
+      state.posts.forEach((post) => {
+        console.log("matched!!!!");
+        if (post.id === state.editData.id) {
+          if (title) post.title = title;
+          if (content) post.content = content;
+          if (userid) post.userid = userid;
+        }
+      });
+
+      state.editData = { id: null, editing: false };
+    },
   },
 });
 
 export const selectAllPosts = (state) => state.posts.posts;
 
-export const { postAdded, addReaction } = postsSlice.actions;
+export const { postAdded, addReaction, deletePost, startEditing, updatePost } =
+  postsSlice.actions;
 
 export default postsSlice.reducer;

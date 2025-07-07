@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { postAdded } from "./postsSlice";
+import { postAdded, updatePost, selectAllPosts } from "./postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { selectAllUsers } from "../users/usersSlice";
@@ -9,12 +9,38 @@ const PostForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userid, setUserId] = useState(0);
+  const editData = useSelector((state) => state.posts.editData);
+  const editPostData = useSelector(selectAllPosts);
+  let postEdition = false;
+
+  if (editData.id) {
+    postEdition = editPostData.find(
+      (currentPost) => currentPost.id === editData.id
+    );
+    console.log("postEdition");
+    console.log(postEdition);
+  }
+
+  useEffect(() => {
+    if (postEdition) {
+      setTitle(postEdition.title);
+      setContent(postEdition.content);
+      setUserId(postEdition.userid);
+    }
+  }, [postEdition]);
+
   const allUsers = useSelector(selectAllUsers);
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.clear();
-    dispatch(postAdded({ id: nanoid(), title, content, userid }));
+    if (!postEdition) {
+      dispatch(postAdded({ id: nanoid(), title, content, userid }));
+    } else {
+      console.log("updating");
+      dispatch(updatePost({ title, content, userid }));
+      postEdition = false;
+    }
     setTitle("");
     setContent("");
     setUserId("");
@@ -79,7 +105,7 @@ const PostForm = () => {
           type="submit"
           className="mt-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-xl transition text-lg"
           disabled={saveConditon()}>
-          Submit Post
+          {postEdition ? "Update Post" : "Submit Post"}
         </button>
       </form>
     </div>
