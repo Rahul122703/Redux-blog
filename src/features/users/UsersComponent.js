@@ -8,7 +8,7 @@ const UsersComponent = ({ userid }) => {
   const displayName = matchedUser ? matchedUser.name : "Unknown Author";
 
   return (
-    <div className="flex items-center gap-3 mt-4">
+    <div className="flex items-center">
       <div className="text-sm">
         <p className="text-gray-800 font-semibold">{displayName}</p>
         <p className="text-gray-500">Author</p>

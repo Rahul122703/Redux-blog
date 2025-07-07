@@ -14,7 +14,7 @@ const ReactionButtons = ({ blogid, reaction }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex gap-4 mt-4 text-xl">
+    <div className="flex text-xl border border-none">
       {Object.entries(reaction).map(([key, value]) => (
         <button
           key={key}

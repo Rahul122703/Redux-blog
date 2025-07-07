@@ -21,7 +21,7 @@ const PostsList = ({ error }) => {
   }
 
   return (
-    <div className="bg-gray-100 p-6 flex flex-wrap gap-6 w-full">
+    <div className="bg-gray-100 p-6 flex flex-wrap gap-6 w-full justify-center">
       {posts.map((post, index) => (
         <BlogCard {...post} key={index} />
       ))}
