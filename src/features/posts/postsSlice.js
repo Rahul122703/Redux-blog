@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  current,
+  nanoid,
+} from "@reduxjs/toolkit";
 import axios from "axios";
 
 const POSTS_URL = "https://dummyjson.com/posts";
@@ -104,6 +109,9 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state) => state.posts.posts;
 export const selectCurrentStatus = (state) => state.posts.status;
 export const selectErrorMessage = (state) => state.posts.error;
+export const selectSinglePost = (state, action) => {
+  return state.posts.find((currentPost) => currentPost.id === action.payload);
+};
 
 export const { postAdded, addReaction, deletePost, startEditing, updatePost } =
   postsSlice.actions;
