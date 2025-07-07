@@ -10,7 +10,7 @@ const App = () => {
   const dispatch = useDispatch();
   dispatch(fetchUsers());
   const postCurrentStatus = useSelector(selectCurrentStatus);
-
+  //git status && git add . && git commit -m "adding new feature" && git push
   // setTimeout(() => {
   //   console.clear();
   // }, 500);
