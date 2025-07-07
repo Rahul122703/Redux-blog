@@ -4,13 +4,13 @@ import {
   updatePost,
   fetechPosts,
   selectAllPosts,
-  selectErrorMessage,
   selectCurrentStatus,
 } from "../features/posts/postsSlice";
 
 import { nanoid } from "@reduxjs/toolkit";
 import { selectAllUsers } from "../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Formpage = () => {
   // Form states
@@ -21,12 +21,12 @@ const Formpage = () => {
   // Redux selectors
   const allUsers = useSelector(selectAllUsers);
   const editPostData = useSelector(selectAllPosts);
-  const postErrorMessage = useSelector(selectErrorMessage);
   const postCurrentStatus = useSelector(selectCurrentStatus);
   const editData = useSelector((state) => state.posts.editData);
 
-  // Redux dispatcher
+  // Redux dispatcher & other hooks
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let postEdition = false;
 
   useEffect(() => {
@@ -60,6 +60,7 @@ const Formpage = () => {
     setTitle("");
     setContent("");
     setUserId("");
+    navigate("/");
   };
 
   const userOption = allUsers.map(({ name, id }, idx) => (
@@ -119,7 +120,7 @@ const Formpage = () => {
 
         <button
           type="submit"
-          className={`mt-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-2 rounded-xl text-lg shadow-md transition-all duration-300 max-w-[15rem] ${
+          className={`mt-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-2 rounded-xl text-lg shadow-md transition-all duration-300  self-center px-3 ${
             saveConditon() ? "opacity-60 cursor-not-allowed" : ""
           }`}
           disabled={saveConditon()}>

@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import PostsList from "../features/posts/PostsList";
 import { useSelector } from "react-redux";
 import { selectCurrentStatus } from "../features/posts/postsSlice";
 import Loader from "../components/Loader";
+import { useDispatch } from "react-redux";
+import { fetechPosts } from "../features/posts/postsSlice";
 const HomePage = () => {
   const postCurrentStatus = useSelector(selectCurrentStatus);
-  //git status && git add . && git commit -m "adding new feature" && git push
-  // setTimeout(() => {
-  //   console.clear();
-  // }, 500);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (postCurrentStatus === "idle") {
+      dispatch(fetechPosts());
+    }
+  }, [postCurrentStatus, dispatch]);
   return (
-    <div className="m-auto flex flex-col lg:flex-row justify-between">
+    <div className="flex flex-row flex-wrap">
       {postCurrentStatus === "loading" ? (
         <Loader />
       ) : (

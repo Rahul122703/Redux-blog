@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectAllPosts } from "./postsSlice";
-import BlogCard from "./BlogCard";
+import BlogCard from "../../components/BlogCard";
 
 const PostsList = ({ error }) => {
   const posts = useSelector(selectAllPosts);
@@ -21,7 +21,7 @@ const PostsList = ({ error }) => {
   }
 
   return (
-    <div className="bg-gray-100 p-6 flex flex-wrap gap-6 w-full justify-center">
+    <div className="p-1 lg:p-4 flex flex-wrap gap-6 w-full justify-center">
       {posts.map((post, index) => (
         <BlogCard {...post} key={index} />
       ))}

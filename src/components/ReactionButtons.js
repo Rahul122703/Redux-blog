@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { addReaction } from "./postsSlice";
+import { addReaction } from "../features/posts/postsSlice";
 
 const allButtons = {
   like: "👍",
@@ -12,9 +12,8 @@ const allButtons = {
 
 const ReactionButtons = ({ blogid, reaction }) => {
   const dispatch = useDispatch();
-
   return (
-    <div className="flex text-xl border border-none">
+    <div className="flex text-xl border border-none gap-4 my-4 text-black">
       {Object.entries(reaction).map(([key, value]) => (
         <button
           key={key}

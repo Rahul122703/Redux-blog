@@ -109,9 +109,8 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state) => state.posts.posts;
 export const selectCurrentStatus = (state) => state.posts.status;
 export const selectErrorMessage = (state) => state.posts.error;
-export const selectSinglePost = (state, action) => {
-  return state.posts.find((currentPost) => currentPost.id === action.payload);
-};
+export const selectSinglePost = (id) => (state) =>
+  state.posts.posts.find((post) => post.id === id);
 
 export const { postAdded, addReaction, deletePost, startEditing, updatePost } =
   postsSlice.actions;
