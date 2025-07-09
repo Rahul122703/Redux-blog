@@ -5,7 +5,8 @@ import { deletePost, startEditing } from "../features/posts/postsSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const BlogCard = ({ id, title, content, userid, reaction }) => {
+import { memo } from "react";
+let BlogCard = ({ id, title, content, userid, reaction }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -57,5 +58,7 @@ const BlogCard = ({ id, title, content, userid, reaction }) => {
     </div>
   );
 };
+
+BlogCard = memo(BlogCard);
 
 export default BlogCard;
