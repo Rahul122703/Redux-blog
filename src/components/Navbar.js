@@ -10,6 +10,7 @@ const Navbar = () => {
         </Link>
         <div className="flex gap-6 text-white font-semibold">
           <NavLink to="/">Home</NavLink>
+          <NavLink to="/users">Users</NavLink>
           <NavLink to="/form">New Post</NavLink>
         </div>
       </div>

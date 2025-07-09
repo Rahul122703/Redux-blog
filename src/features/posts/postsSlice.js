@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  nanoid,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const POSTS_URL = "https://dummyjson.com/posts";

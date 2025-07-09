@@ -5,7 +5,8 @@ import BlogCard from "../../components/BlogCard";
 
 const PostsList = ({ error }) => {
   const posts = useSelector(selectAllPosts);
-
+  console.log("posts");
+  console.log(posts);
   if (error === "rejected") {
     return (
       <div className="flex items-center justify-center w-full h-full p-10">
